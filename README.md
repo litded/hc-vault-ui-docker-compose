@@ -3,9 +3,13 @@
 **Docker:**
 
 mkdir -p ./vault/{config,data,file,policies}
+
 Скопируйте vault.json в ./vault/config/vault.json
+
 docker-compose up -d
+
 http://localhost:8200
+
 
 **Gitlab:**
 
