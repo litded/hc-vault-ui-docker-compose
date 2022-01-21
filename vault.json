@@ -1,0 +1,20 @@
+{
+    "ui": "true",
+    "disable_mlock": "true",
+    "listener":  {
+      "tcp":  {
+        "address":  "0.0.0.0:8200",
+        "tls_disable":  "true",
+        "proxy_protocol_behaviour": "use_always",
+        "proxy_protocol_authorized_addrs": "0.0.0.0"
+      }
+    },
+    "backend": {
+      "file": {
+        "path": "/vault/file"
+      }
+    },
+    "default_lease_ttl": "168h",
+    "max_lease_ttl": "0h",
+    "api_addr": "http://0.0.0.0:8200"
+}

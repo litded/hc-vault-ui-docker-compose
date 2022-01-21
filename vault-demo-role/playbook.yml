@@ -1,0 +1,10 @@
+---
+- hosts: all
+  connection: local
+  vars:
+    vault_url: https://vault.url
+    vault_token: vault_token
+    vault_secret: ansible/demo-vault/production/db
+    serverlab_db: "{{ lookup('hashi_vault', 'secret={{ vault_secret }} token={{ vault_token }} url={{ vault_url }}') }}"
+  roles:
+    - '{{playbook_dir}}'

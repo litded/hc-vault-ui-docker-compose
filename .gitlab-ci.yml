@@ -1,0 +1,18 @@
+stages:
+  - test_vault
+
+before_script:
+  - apk add --update --no-cache vault libcap
+  - setcap cap_ipc_lock= /usr/sbin/vault
+  - echo $CI_COMMIT_REF_NAME
+#  - export VAULT_SKIP_VERIFY=true
+#  - export VAULT_ADDR=https://vault-url
+  - export VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=project-test jwt=$CI_JOB_JWT)"
+
+test:
+  stage: test_vault
+  script:
+      - export LOGIN="$(vault kv get -field=login secret/projects/demo-vault/mariadb)"
+      - export PASSWORD="$(vault kv get -field=password secret/projects/demo-vault/mariadb)"
+      - echo $LOGIN
+      - echo $PASSWORD

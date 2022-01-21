@@ -1,0 +1,15 @@
+---
+- name: Configure WordPress
+  template:
+    src: wp-config.php.j2
+    dest: /tmp/wp-config.php
+  with_items:
+    - "{{ serverlab_db }}"
+  tags:
+    - update_wp_config
+
+- name: Return all secrets from a path
+  debug:
+    msg: "{{ lookup('hashi_vault', 'secret={{ vault_secret }} token={{ vault_token }} url={{ vault_url }} validate_certs=False') }}"
+  tags:
+    - test
